@@ -1,0 +1,1748 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: #0a0a0c;
+    color: white;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* SLIDER I GRADIENTY W TLE */
+.background-slider {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -3;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+.gradient-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(74, 20, 140, 0.35) 0%, rgba(10, 10, 12, 0.9) 100%);
+    z-index: -2;
+}
+
+.cinema-vignette {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, transparent 25%, transparent 75%, rgba(0, 0, 0, 0.85) 100%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* NAVBAR */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 40px;
+    background: rgba(10, 10, 12, 0.7);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    position: relative;
+    z-index: 10;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.custom-logo {
+    height: 125px;
+    width: auto;
+    object-fit: contain;
+    filter: none !important;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.nav-logo:hover .custom-logo {
+    transform: scale(1.05) rotate(-1deg);
+    filter: none !important;
+}
+
+/* MENU NAWIGACYJNE */
+.nav-menu {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+}
+
+.nav-item {
+    color: #888892;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 8px 0;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: #00b0ff;
+    box-shadow: 0 0 10px #00b0ff;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-item:hover::after, 
+.nav-item.active::after {
+    width: 100%;
+}
+
+.nav-item:hover, 
+.nav-item.active {
+    color: #ffffff;
+}
+
+/* PRZYCISKI W NAVBARZE */
+.nav-buttons {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.btn-login {
+    background: transparent;
+    border: 2px solid #5865F2;
+    color: #5865F2;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s;
+}
+
+.btn-login:hover {
+    background: rgba(88, 101, 242, 0.1);
+    box-shadow: 0 0 15px rgba(88, 101, 242, 0.3);
+}
+
+.btn-connect {
+    background: linear-gradient(90deg, #6200ea 0%, #00b0ff 100%);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 4px 15px rgba(98, 0, 234, 0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-connect:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 176, 255, 0.5);
+}
+
+/* KONTENER GŁÓWNY SEKCJI */
+.main-container {
+    padding: 60px 40px;
+    max-width: 1400px; /* Zwiększone z 1200px, by 4 karty ładnie mieściły się w rzędzie */
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 80vh;
+}
+
+/* SEKCJA O NAS */
+.about-section-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 50px;
+    text-align: left;
+    width: 100%;
+    max-width: 1150px;
+    margin: 30px auto 0;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: aboutFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes aboutFadeIn {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.about-left-col {
+    flex: 1;
+    max-width: 650px;
+}
+
+.about-badge {
+    display: inline-block;
+    border: 1px solid #ff007f;
+    color: #ff007f;
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 4px 14px;
+    border-radius: 4px;
+    letter-spacing: 1.5px;
+    margin-bottom: 18px;
+    background: rgba(255, 0, 127, 0.05);
+}
+
+.about-main-title {
+    font-size: 3.8rem;
+    font-weight: 900;
+    color: white;
+    line-height: 1.1;
+    margin-bottom: 8px;
+    letter-spacing: -1px;
+}
+
+.about-subtitle {
+    color: #ff007f;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+}
+
+.about-description {
+    color: #a3a3a3;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 35px;
+}
+
+.about-description .highlight-pink {
+    color: #ff007f;
+    font-weight: 700;
+}
+
+/* KARTY CECH (O NAS) */
+.about-features-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 40px;
+}
+
+.about-feature-item {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    background: rgba(20, 20, 27, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-left: 4px solid #ff007f;
+    padding: 16px 22px;
+    border-radius: 4px 12px 12px 4px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.about-feature-item:hover {
+    transform: translateX(10px);
+    background: rgba(255, 0, 127, 0.05);
+    border-left-color: #fff;
+    box-shadow: 10px 0 20px -5px rgba(255, 0, 127, 0.2);
+}
+
+.feature-icon-box {
+    width: 44px;
+    height: 44px;
+    background: rgba(255, 0, 127, 0.1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    color: #ff007f;
+}
+
+.about-feature-item h4 {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 3px;
+    letter-spacing: 0.5px;
+}
+
+.about-feature-item p {
+    font-size: 0.9rem;
+    color: #71717a;
+    font-weight: 500;
+}
+
+/* PRZYCISKI O NAS */
+.about-actions-area {
+    display: flex;
+    gap: 15px;
+}
+
+.btn-about-play {
+    background: #ff007f;
+    color: white;
+    padding: 14px 32px;
+    border-radius: 8px;
+    font-weight: 800;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 20px rgba(255, 0, 127, 0.4);
+    transition: transform 0.2s, background 0.2s;
+    animation: playPulse 2s infinite;
+}
+
+.btn-about-play:hover {
+    background: #e60072;
+    transform: translateY(-2px);
+}
+
+@keyframes playPulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 0, 127, 0.6); }
+    70% { box-shadow: 0 0 0 15px rgba(255, 0, 127, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 0, 127, 0); }
+}
+
+.btn-about-discord {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: white;
+    padding: 14px 32px;
+    border-radius: 8px;
+    font-weight: 800;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.btn-about-discord:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* PRAWA KOLUMNA: PANEL STATYSTYK */
+.about-right-col {
+    display: flex;
+    justify-content: flex-end;
+    flex: 0 0 380px;
+}
+
+.stats-widget-box {
+    width: 100%;
+    background: rgba(10, 10, 15, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 30px;
+    padding: 30px;
+    backdrop-filter: blur(25px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+.stats-widget-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.stats-header-icon {
+    width: 28px;
+    height: 28px;
+    background: #ff007f;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+}
+
+.stats-widget-header h5 {
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: white;
+}
+
+.stats-status-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.status-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #71717a;
+    letter-spacing: 0.5px;
+}
+
+.status-value-online {
+    color: #22c55e;
+    font-weight: 800;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+}
+
+.stats-glow-line {
+    height: 2px;
+    background: #ff007f;
+    box-shadow: 0 0 10px #ff007f;
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+.stats-table-content {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-bottom: 20px;
+}
+
+.stats-table-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    padding-bottom: 14px;
+}
+
+.stats-table-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.table-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #71717a;
+    letter-spacing: 0.5px;
+}
+
+.table-value {
+    color: #ff007f;
+    font-weight: 800;
+    font-size: 1.05rem;
+}
+
+.stats-widget-footer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 16px;
+    margin-top: 10px;
+    color: #ff007f;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.footer-dot {
+    font-size: 0.65rem;
+}
+
+/* CENTROWANIE ELEMENTÓW HERO */
+.text-center {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+}
+
+.hero-title {
+    font-size: 4rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    background: linear-gradient(120deg, #ffffff 30%, #a3a3a3 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-desc {
+    color: #b3b3b3;
+    font-size: 1.2rem;
+    max-width: 600px;
+    line-height: 1.6;
+    margin: 0 auto;
+}
+
+.page-title {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.page-text {
+    color: #ccc;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* SIATKA I KARTY FRAKCJI */
+/* Główne ustawienie siatki - 4 równe kolumny */
+.faction-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 równe kolumny */
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Każda karta ma stałą wysokość i szerokość */
+.faction-card {
+    background: #0d0d0d;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 18px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.2s;
+}
+
+.faction-card:hover {
+    transform: translateY(-5px);
+    border-color: #ff007f;
+}
+
+/* Naprawa obrazków */
+.faction-img-icon {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    margin-bottom: 15px;
+}
+
+.faction-card:hover .faction-img-icon {
+    transform: scale(1.15) rotate(3deg);
+}
+
+.faction-img-icon.icon-160 {
+    width: 160px !important;
+    height: 160px !important;
+}
+
+.faction-card .name {
+    font-size: 1.2rem;
+    font-weight: 900;
+    margin-top: 20px;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.faction-card .fullname {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.4);
+    text-align: center;
+    margin-top: 8px;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* OKNO FORMULARZA REKRUTACJI */
+.form-window-box {
+    background: rgba(13, 13, 18, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 35px;
+    backdrop-filter: blur(25px);
+    max-width: 750px;
+    margin: 20px auto 0;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+}
+
+.form-header-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding-bottom: 20px;
+    margin-bottom: 25px;
+}
+
+.form-header-area h3 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #fff;
+}
+
+.btn-back-factions {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ccc;
+    padding: 8px 16px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-back-factions:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+}
+
+.form-group {
+    margin-bottom: 25px;
+    text-align: left;
+    width: 100%;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #f1f1f5;
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 14px 16px;
+    border-radius: 12px;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    transition: all 0.3s;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.form-group input:focus, .form-group textarea:focus {
+    border-color: #00b0ff;
+    box-shadow: 0 0 15px rgba(0, 176, 255, 0.2);
+    outline: none;
+    background: rgba(0, 0, 0, 0.55);
+}
+
+/* ANIMACJA WEJŚCIA STRONY */
+.hero-super-slow-animated {
+    opacity: 0;
+    transform: translateY(25px);
+    animation: heroCinematicFadeVerySlow 4.5s cubic-bezier(0.1, 1, 0.1, 1) forwards;
+}
+
+@keyframes heroCinematicFadeVerySlow {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* SYSTEM NOTYFIKACJI TOAST */
+#custom-notification-container {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 15px;
+}
+
+.custom-toast {
+    background: rgba(13, 13, 17, 0.95);
+    border-left: 4px solid #00b0ff;
+    padding: 18px 26px;
+    border-radius: 10px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    min-width: 330px;
+    backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    transform: translateY(120%);
+    animation: toastIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.custom-toast.error { border-left-color: #ff3e3e; }
+.custom-toast.success { border-left-color: #00ff88; }
+
+@keyframes toastIn { to { transform: translateY(0); } }
+.custom-toast.hide { transform: translateY(150%); opacity: 0; }
+
+/* PROFIL DISCORD */
+.discord-user-container {
+    position: relative;
+    display: inline-block;
+}
+
+.btn-login .user-profile-badge {
+    display: none;
+}
+
+.btn-login.logged-in {
+    background: transparent !important;
+    border: none !important;
+    backdrop-filter: none !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn-login.logged-in .discord-login-wrapper {
+    display: none !important;
+}
+
+.btn-login.logged-in .user-profile-badge {
+    display: flex !important;
+    align-items: center;      
+    gap: 15px;                 
+    background: rgba(255, 255, 255, 0.03); 
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 8px 20px 8px 10px;
+    border-radius: 60px;       
+    transition: background 0.3s, border-color 0.3s;
+}
+
+.btn-login.logged-in .user-profile-badge:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(88, 101, 242, 0.4);
+}
+
+#nav-avatar {
+    width: 65px !important;    
+    height: 65px !important;
+    min-width: 65px !important;
+    min-height: 65px !important;
+    max-width: 65px !important;
+    max-height: 65px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    border: 3px solid #23a55a !important; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
+}
+
+#nav-username {
+    color: #fff !important;    
+    font-size: 1.25rem !important; 
+    font-weight: 800 !important;
+    letter-spacing: 0.5px;
+    text-transform: none !important;
+    white-space: nowrap;       
+}
+
+/* MENU ROZWIJANE DISCORD */
+.discord-dropdown {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    background: rgba(11, 11, 15, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    width: 230px;
+    padding: 14px;
+    display: none;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(24px);
+    z-index: 100000;
+    animation: dropdownSlideIn 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+@keyframes dropdownSlideIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.discord-dropdown.show {
+    display: block !important;
+}
+
+.dropdown-info {
+    padding: 2px 4px 10px;
+}
+
+.role-badge {
+    display: inline-block;
+    background: rgba(0, 176, 255, 0.08);
+    border: 1px solid rgba(0, 176, 255, 0.15);
+    color: #00b0ff;
+    font-size: 0.68rem;
+    font-weight: 800;
+    padding: 5px 12px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.05);
+    margin: 4px 0 10px;
+}
+
+.btn-logout {
+    width: 100%;
+    background: rgba(255, 62, 62, 0.03);
+    border: 1px solid rgba(255, 62, 62, 0.08);
+    color: #ff4a4a;
+    padding: 11px 14px;
+    text-align: left;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.2s ease;
+}
+
+.btn-logout:hover {
+    background: rgba(255, 62, 62, 0.1);
+    border-color: rgba(255, 62, 62, 0.2);
+    color: #ff6b6b;
+    box-shadow: 0 4px 15px rgba(255, 62, 62, 0.1);
+}
+
+/* Nowy wygląd przycisku Połącz */
+.btn-connect-fixed {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background: rgba(20, 20, 20, 0.85); /* Ciemne tło jak w logach */
+    color: #ffffff;
+    text-decoration: none;
+    font-family: monospace; /* Techniczna czcionka */
+    font-size: 0.85rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding: 10px 20px;
+    border-left: 3px solid #ff007f; /* Różowy pasek stanu */
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 0px; /* Całkowicie ostre krawędzie pod styl logów */
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(255, 0, 127, 0.05);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 9999;
+    transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Tekst "Połącz" z małym prefiksem statusu */
+.btn-connect-fixed span {
+    color: #ff007f;
+    font-weight: bold;
+}
+
+/* Efekt po najechaniu myszką */
+.btn-connect-fixed:hover {
+    background: rgba(255, 0, 127, 0.08); /* Delikatne różowe podświetlenie tła */
+    border-left-color: #ffffff; /* Pasek zmienia się na biały */
+    box-shadow: 0 0 15px rgba(255, 0, 127, 0.3); /* Lekki neonowy glow wokół */
+    transform: translateY(-2px);
+    color: #ffffff;
+}
+
+/* Efekt kliknięcia */
+.btn-connect-fixed:active {
+    transform: translateY(0);
+}
+
+/* RESPONSYWNOŚĆ SERWERA */
+@media (max-width: 992px) {
+    .about-section-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+    }
+    .about-right-col {
+        justify-content: center;
+        width: 100%;
+    }
+    .stats-widget-box {
+        width: 100%;
+        max-width: 450px;
+    }
+}
+
+/* Kontener główny dla wszystkich kart - wyrównuje je idealnie do środka */
+.faction-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px; /* Równe odstępy między kartami w pionie i poziomie */
+    margin-top: 30px;
+    width: 100%;
+}
+
+/* Wygląd pojedynczej karty (z zachowaniem przezroczystości z Twojego screena) */
+.faction-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 30px 20px;
+    width: 220px; /* Stała, równa szerokość dla każdej karty */
+    min-height: 280px; /* Stała wysokość minimalna, by karty były identyczne */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    backdrop-filter: blur(10px);
+}
+
+/* Efekt najechania myszką (lekkie podświetlenie borderu i uniesienie) */
+.faction-card:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: #ff007f; /* Różowy akcent pasujący do Twojej strony */
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Kontener na ikonę/emoji wewnątrz karty */
+.faction-icon-wrapper {
+    width: 90px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+/* Stylizacja właściwych obrazków logotypów */
+.faction-img-icon {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* Stylizacja awaryjnych emoji, jeśli grafika się nie załaduje */
+.faction-emoji-fallback {
+    font-size: 3.5rem;
+    line-height: 1;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
+}
+
+/* Duży skrót nazwy (np. KSP, PRM) */
+.faction-card .name {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+/* Pełna nazwa pod spodem */
+.faction-card .fullname {
+    font-size: 0.85rem;
+    color: #b3b3b3;
+    line-height: 1.4;
+}
+
+/* Wymuszenie idealnego zaokrąglenia dla logotypów (np. PRM) */
+.faction-img-icon.rounded-logo {
+    border-radius: 50%;
+    object-fit: cover;
+    background: rgba(255, 255, 255, 0.05); /* Delikatne rozjaśnienie pod kołem */
+    padding: 2px; /* Estetyczny odstęp */
+}
+
+/* Kontener główny listy zmian */
+.changelog-container {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    padding-bottom: 50px;
+}
+
+/* Pojedynczy blok Changelogu */
+.changelog-box {
+    background: rgba(20, 20, 20, 0.4);
+    border-left: 4px solid #ff007f; /* Różowy pasek po lewej stronie pod styl Twojej strony */
+    padding: 10px 5px;
+}
+
+/* Nagłówek bloku (np. Changelog #2) */
+.changelog-header {
+    padding: 10px 20px;
+}
+
+.changelog-version {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Treść wewnątrz zmian */
+.changelog-body {
+    padding: 10px 20px;
+}
+
+/* Podtytuł sekcji (np. Dodano) */
+.changelog-section-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 15px;
+}
+
+/* Lista punktów */
+.changelog-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Pojedyncza linijka tekstu */
+.changelog-list li {
+    font-size: 0.95rem;
+    color: #e0e0e0; /* Delikatna, lekko szara czcionka ułatwiająca czytanie */
+    line-height: 1.5;
+    display: flex;
+    align-items: flex-start;
+}
+
+/* Wygląd prefiksu [+] */
+.prefix-plus {
+    color: #ffffff; /* Czysty biały lub zmień na #ff007f dla wyróżnienia różem */
+    font-weight: bold;
+    margin-right: 8px;
+    flex-shrink: 0;
+}
+
+/* Kontener główny dla siatki regulaminu */
+.rules-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 60px;
+}
+
+/* Podstawowa karta regulaminu */
+.rules-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 20px;
+    backdrop-filter: blur(10px);
+}
+
+.rules-card h3 {
+    font-size: 1.2rem;
+    color: #ffffff;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 8px;
+}
+
+/* Karta Zakazanych zachowań (Czerwony akcent) */
+.rules-card-alert {
+    background: rgba(217, 4, 41, 0.04);
+    border: 1px solid rgba(217, 4, 41, 0.2);
+    border-radius: 12px;
+    padding: 20px;
+    backdrop-filter: blur(10px);
+}
+
+.rules-card-alert h3 {
+    font-size: 1.2rem;
+    color: #d90429;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(217, 4, 41, 0.2);
+    padding-bottom: 8px;
+}
+
+/* Karta Regulaminu Napadów (Rozciągnięta na całą szerokość i podświetlona różem) */
+.rules-card-highlight {
+    grid-column: 1 / -1;
+    background: rgba(255, 0, 127, 0.03);
+    border: 1px solid rgba(255, 0, 127, 0.2);
+    border-radius: 12px;
+    padding: 25px;
+    backdrop-filter: blur(10px);
+    margin-top: 10px;
+}
+
+.rules-card-highlight h3 {
+    font-size: 1.4rem;
+    color: #ff007f;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 0, 127, 0.2);
+    padding-bottom: 8px;
+}
+
+.rules-card ul, .rules-card-alert ul, .rules-card-highlight ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.rules-card li, .rules-card-alert li, .rules-card-highlight li {
+    font-size: 0.9rem;
+    color: #cccccc;
+    line-height: 1.5;
+    display: flex;
+    align-items: flex-start;
+}
+
+
+.rules-dot {
+    color: #ff007f; 
+    font-weight: bold;
+    margin-right: 8px;
+    flex-shrink: 0;
+    font-family: monospace;
+}
+
+.rules-card-alert .rules-dot {
+    color: #d90429; 
+}
+
+/* Główny kontener "O nas" - podział na 2 kolumny */
+.about-modern-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px;
+    text-align: left; /* Zmiana na czysty styl od lewej */
+    align-items: center;
+}
+
+/* Lewa strona (Tekst przewodnia) */
+.about-hero-side {
+    flex: 1;
+    min-width: 320px;
+}
+
+.about-badge-terminal {
+    font-family: monospace;
+    color: #ff007f;
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.about-hero-side .about-main-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 2.5rem;
+    color: #ffffff;
+    margin: 0 0 20px 0;
+    line-height: 1.2;
+}
+
+.about-hero-side .about-description {
+    font-size: 1rem;
+    color: #cccccc;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+/* Prawa strona (Bloki w stylu logów) */
+.about-logs-side {
+    flex: 1;
+    min-width: 320px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Karta stylizowana na log systemowy */
+.about-log-card {
+    background: rgba(20, 20, 20, 0.4);
+    border-left: 3px solid #ff007f; /* Różowy akcent techniczny */
+    padding: 20px;
+    border-radius: 0 4px 4px 0;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.about-log-card:hover {
+    background: rgba(255, 0, 127, 0.03);
+    transform: translateX(5px);
+}
+
+/* Nagłówek wewnątrz karty logu */
+.log-card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.log-prefix {
+    font-family: monospace;
+    font-weight: bold;
+    color: #ffffff;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+.about-log-card h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Treść w karcie logu */
+.about-log-card p {
+    font-size: 0.9rem;
+    color: #a0a0a0;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Przycisk akcji */
+.btn-about-play {
+    display: inline-block;
+    background: #ff007f;
+    color: #ffffff;
+    padding: 12px 30px;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.btn-about-play:hover {
+    background: #e0006c;
+    transform: translateY(-2px);
+}
+
+/* Responsywność dla mniejszych ekranów */
+@media (max-width: 768px) {
+    .about-modern-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    .log-card-header {
+        justify-content: center;
+    }
+    .about-log-card {
+        border-left: none;
+        border-top: 3px solid #ff007f;
+        border-radius: 0 0 4px 4px;
+    }
+    .about-log-card:hover {
+        transform: translateY(3px);
+    }
+}
+
+/* Kontener główny dla nowego stylu podań */
+.premium-recruitment-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Duży, gruby nagłówek na wzór SS */
+.premium-page-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 3.5rem;
+    color: #ffffff;
+    letter-spacing: 2px;
+    margin-bottom: 0px;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* Różowy podtytuł */
+.premium-hero-desc {
+    color: #ff007f;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    margin-top: 5px;
+    margin-bottom: 45px;
+}
+
+/* Siatka kafelków - 4 w jednym rzędzie */
+.premium-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    align-items: stretch;
+}
+
+/* Konstrukcja pojedynczej karty */
+.premium-faction-card {
+    background: rgba(13, 13, 13, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 18px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.premium-faction-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 0, 127, 0.3);
+}
+
+/* Górna belka wewnątrz karty (Ikona + Status) */
+.card-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Mały kwadracik na ikonę */
+.card-mini-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Subtelne poświaty dla tła ikon z podziałem na kolory */
+.badge-blue { background: rgba(0, 120, 255, 0.15); }
+.badge-red { background: rgba(255, 0, 50, 0.15); }
+.badge-orange { background: rgba(255, 100, 0, 0.15); }
+.badge-yellow { background: rgba(255, 190, 0, 0.15); }
+
+/* Plakietka "OTWARTE" */
+.status-badge {
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    padding: 4px 10px;
+    border-radius: 20px;
+}
+
+.badge-open {
+    background: rgba(255, 0, 127, 0.1);
+    color: #ff007f;
+}
+
+/* Tytuł frakcji */
+.card-main-title {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 12px 0;
+    letter-spacing: 0.5px;
+}
+
+/* Opis frakcji */
+.card-description {
+    font-size: 0.85rem;
+    color: #909095;
+    line-height: 1.5;
+    margin: 0 0 20px 0;
+    flex-grow: 1; /* Wyrównuje dół wszystkich kart */
+}
+
+/* Sekcja małych wymagań wewnątrz kafelka */
+.card-requirements {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 25px;
+}
+
+.req-item {
+    background: rgba(20, 20, 20, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    color: #cccccc;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.req-icon {
+    opacity: 0.7;
+}
+
+/* Jaskrawy przycisk APLIKUJ */
+.btn-premium-apply {
+    width: 100%;
+    background: #ff007f; /* Identyczny różowy z DopeRP */
+    color: #ffffff;
+    border: none;
+    padding: 13px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-premium-apply:hover {
+    background: #e0006c;
+    box-shadow: 0 0 15px rgba(255, 0, 127, 0.45);
+}
+
+.btn-premium-apply:active {
+    transform: scale(0.98);
+}
+
+/* --- DOPE WINDOW FORMULARZ --- */
+.dope-form-window {
+    background: rgba(13, 13, 13, 0.95);
+    border: 1px solid rgba(255, 0, 127, 0.2);
+    border-radius: 18px;
+    padding: 35px;
+    text-align: left;
+    margin-top: 20px;
+}
+
+.dope-form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+}
+
+.dope-form-header h2 {
+    font-size: 1.5rem;
+    margin: 0;
+    font-weight: 800;
+}
+
+.btn-dope-back {
+    background: rgba(255, 255, 255, 0.05);
+    border: none;
+    color: #ffffff;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.btn-dope-back:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.btn-dope-submit {
+    width: 100%;
+    background: #ff007f;
+    color: #ffffff;
+    border: none;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 800;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.btn-dope-submit:hover {
+    background: #e0006c;
+}
+
+
+/* Wymuszenie rzędu dla kart v2 */
+.premium-cards-flex-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+    gap: 16px;
+    width: 100%;
+}
+
+/* Nowy typ karty z dużym zdjęciem - wymuszenie stania w linii */
+.premium-faction-card-v2 {
+    background: rgba(13, 13, 13, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.02);
+    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    
+    /* TO USTAWIA JE W JEDNEJ LINII: */
+    flex: 1;
+    min-width: 230px; 
+    
+    transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.25s ease;
+}
+
+/* Kontener wymuszający prostą linię */
+.premium-cards-flex-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+    gap: 16px;
+    width: 100%;
+}
+
+/* Karta v2 */
+.premium-faction-card-v2 {
+    background: rgba(13, 13, 13, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.02);
+    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    flex: 1;
+    min-width: 230px; 
+    transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.25s ease;
+}
+
+.premium-faction-card-v2:hover {
+    transform: translateY(-6px);
+    border-color: rgba(255, 0, 127, 0.3);
+}
+
+/* Górny boks na zdjęcie frakcji */
+.card-image-header {
+    width: 100%;
+    height: 150px;
+    background-size: cover;      /* Kluczowe: zdjęcie wypełni całe szare pole */
+    background-position: center; /* Centrowanie kadru */
+    background-repeat: no-repeat;
+    position: relative;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    background-color: #1a1a1a;   /* Tymczasowe ciemne tło, gdyby zdjęcie się nie wgrało */
+}
+
+/* Ciemny gradient na dole zdjęcia */
+.card-image-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    background: linear-gradient(to top, rgba(13, 13, 13, 1), rgba(13, 13, 13, 0));
+}
+
+/* Styl dla emotki w rogu */
+.card-fallback-emoji {
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+/* Boks ikonki w lewym górnym rogu */
+.card-mini-badge-overlay {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Kolory poświat tła ikony */
+.badge-blue { background: rgba(0, 120, 255, 0.4); }
+.badge-red { background: rgba(255, 0, 50, 0.4); }
+.badge-orange { background: rgba(255, 100, 0, 0.4); }
+.badge-yellow { background: rgba(255, 190, 0, 0.4); }
+
+/* Status OVERLAY (Otwarte) */
+.status-badge-overlay {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    background: rgba(255, 0, 127, 0.25);
+    color: #ffffff;
+    border: 1px solid rgba(255, 0, 127, 0.4);
+    z-index: 2;
+}
+
+/* Zawartość dolna karty */
+.card-body-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex-grow: 1;
+}
+
+.card-main-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 10px 0;
+}
+
+.card-description {
+    font-size: 0.8rem;
+    color: #909095;
+    line-height: 1.4;
+    margin: 0 0 15px 0;
+    flex-grow: 1;
+}
+
+/* Wymagania */
+.card-requirements {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 20px;
+}
+
+.req-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    color: #cccccc;
+}
+
+/* Guzik Aplikuj */
+.btn-premium-apply {
+    width: 100%;
+    background: #ff007f;
+    color: #ffffff;
+    border: none;
+    padding: 12px;
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-premium-apply:hover {
+    background: #e0006c;
+    box-shadow: 0 0 15px rgba(255, 0, 127, 0.4);
+}
+
+/* Responsywność */
+@media (max-width: 1080px) {
+    .premium-cards-flex-row {
+        flex-direction: column;
+        align-items: center;
+    }
+    .premium-faction-card-v2 {
+        width: 100%;
+        max-width: 450px;
+    }
+}
+
+.fullscreen-video {
+    position: fixed; /* Zostaje w miejscu podczas przewijania */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Dopasowuje film tak, by wypełnił ekran bez rozciągania */
+    z-index: -999; /* Umieszcza film za wszystkimi elementami */
+}
+
+.notification {
+    background: #5865F2; /* Kolor Discorda */
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    margin-top: 10px;
+    font-family: 'Inter', sans-serif;
+    animation: fadeIn 0.3s, fadeOut 0.3s 2.7s;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }

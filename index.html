@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WarszawaRP</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Montserrat:wght@900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <video class="fullscreen-video" autoplay muted loop playsinline>
+    <source src="img/background.mp4" type="video/mp4">
+</video>
+    
+    <div class="cinema-vignette"></div>
+    <div class="gradient-overlay"></div>
+
+    <div id="custom-notification-container"></div>
+
+    <header class="navbar">
+        <div class="nav-logo clickable-logo" id="logo-trigger">
+            <img src="img/logo.png" alt="Logo" class="custom-logo">
+        </div>
+
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="#" class="nav-item active" data-target="start">Start</a></li>
+                <li><a href="#" class="nav-item" data-target="onas">O nas</a></li>
+                <li><a href="#" class="nav-item" data-target="pojecia_rp">Pojęcia RP</a></li>
+                <li><a href="#" class="nav-item" data-target="podania">Podania</a></li>
+                <li><a href="#" class="nav-item" data-target="changelog">Changelog</a></li>
+                <li><a href="#" class="nav-item" data-target="regulamin">Regulamin</a></li>
+            </ul>
+        </nav>
+
+                    <div class="user-profile-badge">
+                        
+                    </div>
+                </a>
+                
+                <div class="discord-dropdown" id="discord-user-dropdown">
+                    <div class="dropdown-info">
+                        <p class="role-badge">Zweryfikowany Obywatel</p>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <button type="button" class="btn-logout" id="btn-discord-logout">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
+                        Rozłącz konto
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-container text-center">
+        <div id="content-area" class="hero-super-slow-animated">
+            
+            <h2 class="page-title">Centrum Podań</h2>
+            <p class="page-text" style="margin-bottom: 30px;">Wybierz interesującą Cię frakcję, aby otworzyć okno formularza</p>
+            
+            <div class="faction-cards-grid">
+    <div class="faction-card" data-faction="ksp">
+        <div class="card-header" style="background-image: url('img/ksp_bg.jpg');">
+            <img src="img/ksp.png" class="faction-img-icon" alt="KSP">
+            <span class="status-badge">• OTWARTE</span>
+        </div>
+        <div class="card-content">
+            <div class="name">KSP</div>
+            <div class="fullname">KOMENDA STOŁECZNA POLICJI</div>
+        </div>
+    </div>
+
+    <div class="faction-card" data-faction="prm">
+        <div class="card-header" style="background-image: url('img/prm_bg.jpg');">
+            <img src="img/prm.png" class="faction-img-icon" alt="PRM">
+            <span class="status-badge">• OTWARTE</span>
+        </div>
+        <div class="card-content">
+            <div class="name">PRM</div>
+            <div class="fullname">PAŃSTWOWE RATOWNICTWO MEDYCZNE</div>
+        </div>
+    </div>
+
+    <div class="faction-card" data-faction="psp">
+        <div class="card-header" style="background-image: url('img/psp_bg.jpg');">
+            <img src="img/psp.png" class="faction-img-icon" alt="PSP">
+            <span class="status-badge">• OTWARTE</span>
+        </div>
+        <div class="card-content">
+            <div class="name">PSP</div>
+            <div class="fullname">PAŃSTWOWA STRAŻ POŻARNA</div>
+        </div>
+    </div>
+
+    <div class="faction-card" data-faction="taxi">
+        <div class="card-header" style="background-image: url('img/taxi_bg.jpg');">
+            <img src="img/taxi.png" class="faction-img-icon" alt="TAXI">
+            <span class="status-badge">• OTWARTE</span>
+        </div>
+        <div class="card-content">
+            <div class="name">TAXI</div>
+            <div class="fullname">ZARZĄD KORPORACJI TAXI</div>
+        </div>
+    </div>
+</div>
+
+        </div>
+    </main>
+
+    <a href="https://www.roblox.com/pl/games/2534724415/Emergency-Response-Liberty-County" target="_blank" class="btn-connect btn-connect-fixed">
+        <span>▶</span> Połącz
+    </a>
+
+    <script src="script.js"></script>
+</body>
+</html>
