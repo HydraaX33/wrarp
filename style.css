@@ -1747,7 +1747,7 @@ body {
 @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
 
-/* Pudełko ląduje w prawym rogu ekranu */
+/* Kontener ustawia przyciski w pionowej kolumnie w prawym dolnym rogu */
 .menu-container {
     position: fixed !important;
     bottom: 20px !important;
@@ -1756,12 +1756,18 @@ body {
     flex-direction: column !important;
     gap: 12px !important;
     z-index: 9999 !important;
+    width: auto !important; /* Blokuje rozciąganie kontenera na cały ekran */
 }
 
-/* Przyciski wewnątrz pudełka słuchają Flexboxa, zachowując styl */
+/* Wymuszamy oryginalne wymiary i styl przycisków */
 .menu-container .btn-connect {
     position: static !important;
-    display: inline-block !important;
-    width: 180px !important; /* Dopasuj tę szerokość do oryginalnego przycisku jeśli trzeba */
-    transform: none !important; /* Resetuje ewentualne przesunięcia */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    width: 210px !important; /* Szerokość dopasowana do oryginalnego przycisku */
+    height: 50px !important;  /* Wysokość dopasowana do oryginalnego przycisku */
+    transform: none !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
 }
