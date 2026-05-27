@@ -1747,8 +1747,8 @@ body {
 @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
 
-.menu-container {
-    display: flex;
-    flex-direction: column; /* Ustawia elementy jeden pod drugim */
-    gap: 10px; /* Odstęp między przyciskami */
+.menu-container .btn-connect {
+    position: static !important; /* Wyłącza nakładanie się przycisków */
+    width: 100%;                 /* Sprawia, że oba przyciski mają taką samą szerokość */
+    box-sizing: border-box;
 }
