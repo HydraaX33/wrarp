@@ -1747,27 +1747,40 @@ body {
 @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
 
-/* Kontener ustawia przyciski w pionowej kolumnie w prawym dolnym rogu */
-.menu-container {
+/* Wymuszenie oryginalnego wyglądu klocka (czarne tło, ramka, wymiary) */
+/* Wygląd czystego przycisku bez różowego kwadratu */
+.btn-connect {
     position: fixed !important;
-    bottom: 20px !important;
-    right: 20px !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 12px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important; /* Środkuje tekst wewnątrz przycisku */
+    width: 210px !important;
+    height: 50px !important;
+    background: #111116 !important; /* Oryginalne ciemne tło */
+    border: 1px solid #ffffff33 !important; /* Elegancka ramka */
+    border-radius: 6px !important;
+    color: #ffffff !important;
+    font-weight: bold !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease !important;
     z-index: 9999 !important;
-    width: auto !important; /* Blokuje rozciąganie kontenera na cały ekran */
 }
 
-/* Wymuszamy oryginalne wymiary i styl przycisków */
-.menu-container .btn-connect {
-    position: static !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: flex-start !important;
-    width: 210px !important; /* Szerokość dopasowana do oryginalnego przycisku */
-    height: 50px !important;  /* Wysokość dopasowana do oryginalnego przycisku */
-    transform: none !important;
-    margin: 0 !important;
-    box-sizing: border-box !important;
+/* Całkowicie ukrywamy i resetujemy stary pasek, jeśli gdzieś wyżej w kodzie jeszcze istniał */
+.btn-connect span {
+    display: none !important;
+}
+
+/* Przycisk POŁĄCZ zostaje na swoim starym miejscu po prawej */
+a[href*="roblox.com"].btn-connect {
+    right: 20px !important;
+    bottom: 20px !important;
+    left: auto !important;
+}
+
+/* Przycisk DISCORD ląduje osobnio po lewej stronie */
+.btn-connect.btn-discord-left {
+    left: 20px !important;
+    bottom: 20px !important;
+    right: auto !important;
 }
